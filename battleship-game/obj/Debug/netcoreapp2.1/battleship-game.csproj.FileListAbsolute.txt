@@ -1,0 +1,11 @@
+C:\Users\Isac\Documents\Webdev\school-projects\csharp\battleship-game\battleship-game\bin\Debug\netcoreapp2.1\battleship-game.deps.json
+C:\Users\Isac\Documents\Webdev\school-projects\csharp\battleship-game\battleship-game\bin\Debug\netcoreapp2.1\battleship-game.runtimeconfig.json
+C:\Users\Isac\Documents\Webdev\school-projects\csharp\battleship-game\battleship-game\bin\Debug\netcoreapp2.1\battleship-game.runtimeconfig.dev.json
+C:\Users\Isac\Documents\Webdev\school-projects\csharp\battleship-game\battleship-game\bin\Debug\netcoreapp2.1\battleship-game.dll
+C:\Users\Isac\Documents\Webdev\school-projects\csharp\battleship-game\battleship-game\bin\Debug\netcoreapp2.1\battleship-game.pdb
+C:\Users\Isac\Documents\Webdev\school-projects\csharp\battleship-game\battleship-game\obj\Debug\netcoreapp2.1\battleship-game.csproj.CoreCompileInputs.cache
+C:\Users\Isac\Documents\Webdev\school-projects\csharp\battleship-game\battleship-game\obj\Debug\netcoreapp2.1\battleship-game.AssemblyInfoInputs.cache
+C:\Users\Isac\Documents\Webdev\school-projects\csharp\battleship-game\battleship-game\obj\Debug\netcoreapp2.1\battleship-game.AssemblyInfo.cs
+C:\Users\Isac\Documents\Webdev\school-projects\csharp\battleship-game\battleship-game\obj\Debug\netcoreapp2.1\battleship-game.dll
+C:\Users\Isac\Documents\Webdev\school-projects\csharp\battleship-game\battleship-game\obj\Debug\netcoreapp2.1\battleship-game.pdb
+C:\Users\Isac\Documents\Webdev\school-projects\csharp\battleship-game\battleship-game\obj\Debug\netcoreapp2.1\battleship-game.csprojAssemblyReference.cache

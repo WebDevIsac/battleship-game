@@ -30,10 +30,10 @@ namespace battleship_game
             }
         }
 
-        public List<List<Point>> DrawOpponent ()
+        /*public List<List<Point>> DrawOpponent ()
         {
             List<Point> opponentShip = new List<Point>();
             List<opponentShip> opponentShips = new List<opponentShip>();
-        }
+        }*/
     }
 }

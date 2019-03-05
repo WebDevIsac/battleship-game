@@ -29,11 +29,11 @@ namespace battleship_game
             KeyEnum pressedKey;
 
             ActiveShip activeShip;
-            List<Ship> Ships;
+            List<OpponentShip> OpponentShips = new List<OpponentShip>();
+            List<Ship> Ships = new List<Ship>();
             Board boarder = new Board();
             Controller controller = new Controller();
             DrawShips drawShips = new DrawShips();
-            Ships = new List<Ship>();
 
 
             boarder.DrawBorder();
@@ -54,14 +54,31 @@ namespace battleship_game
 
                 Ships.Add(new Ship(Program.shipPosX, Program.shipPosY, Program.shipLength, rotate));
 
+                OpponentShips.Add(new OpponentShip(Program.shipLength));
+
                 movingShip = true;
                 Program.shipPosX = 2;
                 Program.shipPosY = 2;
 
+
                 Program.shipLength--;
             }
 
-            List<List<Point>> opponentShips = drawShips.DrawOpponent();
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            for (int i = 0; i < OpponentShips.Count(); i++)
+            {
+                for (int j = 0; j < OpponentShips[i].Positions.Count(); j++)
+                {
+                    Console.WriteLine($"X = {OpponentShips[i].Positions[j].X}");
+                    Console.WriteLine($"Y = {OpponentShips[i].Positions[j].Y}");
+                }
+            }
+            
 
 
 

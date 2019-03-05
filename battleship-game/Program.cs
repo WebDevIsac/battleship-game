@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace battleship_game
 {
@@ -8,8 +9,10 @@ namespace battleship_game
         public static int borderWidth = 40;
         public static int borderHeight = 30;
         public static bool rotate = false;
-        public static int shipLength;
-        public static List<ShipPosition> AllShipsPositions; 
+        public static int shipLength = 6;
+        public static List<Ship> Ships;
+        public static int shipPosX = 2;
+        public static int shipPosY = 2;
 
         static void Main(string[] args)
         {
@@ -22,28 +25,41 @@ namespace battleship_game
 
             int shipPosX;
             int shipPosY;
-            Program.shipLength = 5;
 
             KeyEnum pressedKey;
 
+            ActiveShip activeShip;
             Board boarder = new Board();
             Controller controller = new Controller();
-            Ship ship;
+            Ships = new List<Ship>();
 
 
             boarder.DrawBorder();
 
-            while (settingUpGame)
+            while (shipLength >= 2)
             {
-                ship = new Ship();
-                ship.DrawActiveShip();
-                while(movingShip)
+                activeShip = new ActiveShip();
+                activeShip.DrawActiveShip();
+                while (movingShip)
                 {
-
                     pressedKey = controller.KeyPressed();
-                    ship.MoveShip(pressedKey);
+                    movingShip = activeShip.MoveShip(pressedKey);
                 }
+                
+                Ships.Add(new Ship(Program.shipPosX, Program.shipPosY, Program.shipLength));
+
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine(Ships.Count());
+
+                movingShip = true;
+                Program.shipPosX = 2;
+                Program.shipPosY = 2;
+
+                Program.shipLength--;
             }
+
+            Console.SetCursorPosition(8, 20);
         }
     }
 }

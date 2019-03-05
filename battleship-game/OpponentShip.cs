@@ -2,24 +2,23 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
-using System.Linq;
 
 namespace battleship_game
 {
-    class Ship
+    class OpponentShip
     {
         public List<Point> Positions { get; set; }
         public int length { get; set; }
-        public bool rotate { get; set; }
 
         public int hits { get; set; }
 
-        public Ship (int posX, int posY, int shipLength, bool rotate)
+        public OpponentShip(int shipLength)
         {
             this.Positions = new List<Point>();
-            this.rotate = rotate;
+            bool rotate = false;
             for (int i = 0; i < shipLength; i++)
             {
+
                 if (Program.rotate)
                 {
                     this.Positions.Add(new Point { X = posX, Y = posY + i });
@@ -29,12 +28,6 @@ namespace battleship_game
                     this.Positions.Add(new Point { X = posX - i, Y = posY });
                 }
             }
-        }
-        
-
-        public bool CheckIfHit (int bombX, int bombY)
-        {
-            return (this.Positions.Any(pos => pos.X == bombX & pos.Y == bombY));
         }
     }
 }

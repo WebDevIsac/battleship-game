@@ -19,7 +19,7 @@ namespace battleship_game
                 {
                     Console.SetCursorPosition(i, 2);
                 }
-                Console.Write("X");
+                Console.Write("O");
             }
         }
 
@@ -65,7 +65,7 @@ namespace battleship_game
                     }
                     else
                     {
-                        if (Program.shipPosX < Program.borderWidth - Program.shipLength - 2)
+                        if (Program.shipPosX < Program.borderWidth - Program.shipLength - 1)
                         {
                             Program.shipPosX++;
                         }
@@ -75,7 +75,7 @@ namespace battleship_game
                 case KeyEnum.Space:
                     if (Program.rotate)
                     {
-                        if (Program.shipPosX < (Program.borderWidth) - Program.shipLength - 1)
+                        if (Program.shipPosX < (Program.borderWidth) - Program.shipLength)
                         {
                             Program.rotate = false;
                             for (int i = 0; i < Program.shipLength; i++)
@@ -110,7 +110,7 @@ namespace battleship_game
                 for (int i = 0; i < Program.shipLength; i++)
                 {
                     Console.SetCursorPosition(Program.shipPosX, Program.shipPosY + i);
-                    Console.Write("X");
+                    Console.Write("O");
                     switch (pressedKey)
                     {
                         case KeyEnum.Up:
@@ -138,7 +138,7 @@ namespace battleship_game
                 for (int i = 0; i < Program.shipLength; i++)
                 {
                     Console.SetCursorPosition(Program.shipPosX + i, Program.shipPosY);
-                    Console.Write("X");
+                    Console.Write("O");
                     switch (pressedKey)
                     {
                         case KeyEnum.Up:
@@ -161,13 +161,7 @@ namespace battleship_game
                     
                 }
             }
-
             return true;
-        }
-
-        public void PlaceShip (int shipPosX, int shipPosY, bool rotate)
-        {
-
         }
         
     }

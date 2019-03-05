@@ -25,8 +25,8 @@ namespace battleship_game
                     return KeyEnum.Right;
                 case ConsoleKey.Spacebar:
                     return KeyEnum.Space;
-                case ConsoleKey.R:
-                    return KeyEnum.Rotate;
+                case ConsoleKey.Enter:
+                    return KeyEnum.Enter;
                 default:
                     return KeyEnum.Null;
             }

@@ -5,35 +5,44 @@ namespace battleship_game
 {
     class Program
     {
+        public static int borderWidth = 40;
+        public static int borderHeight = 30;
+        public static bool rotate = false;
+        public static int shipLength;
+        public static List<ShipPosition> AllShipsPositions; 
+
         static void Main(string[] args)
         {
-            Console.Clear();
             Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.Clear();
             Console.CursorVisible = false;
-
-            bool rotate = true;
+            
             bool settingUpGame = true;
+            bool movingShip = true;
 
-            int borderWidth = 40;
-            int borderHeight = 30;
+            int shipPosX;
+            int shipPosY;
+            Program.shipLength = 5;
 
             KeyEnum pressedKey;
 
-            Board boarder = new Board(borderWidth, borderHeight);
+            Board boarder = new Board();
             Controller controller = new Controller();
+            Ship ship;
 
-            CreateShip createShip;
 
             boarder.DrawBorder();
 
-            MoveShip moveShip;
             while (settingUpGame)
             {
-                createShip = new CreateShip();
-                createShip.DrawShip(rotate, 5);
-                pressedKey = controller.KeyPressed();
-                //moveShip.Moving(pressedKey, rotate);
+                ship = new Ship();
+                ship.DrawActiveShip();
+                while(movingShip)
+                {
 
+                    pressedKey = controller.KeyPressed();
+                    ship.MoveShip(pressedKey);
+                }
             }
         }
     }

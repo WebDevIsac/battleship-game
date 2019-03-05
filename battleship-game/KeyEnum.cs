@@ -11,7 +11,7 @@ namespace battleship_game
         Left,
         Right,
         Space,
-        Rotate,
+        Enter,
         Null
     }
 }

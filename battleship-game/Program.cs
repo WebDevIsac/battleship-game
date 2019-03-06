@@ -7,8 +7,8 @@ namespace battleship_game
 {
     class Program
     {
-        public static int borderWidth = 40;
-        public static int borderHeight = 30;
+        public static int borderWidth = 30;
+        public static int borderHeight = 20;
 
         public static bool rotate = false;
 
@@ -100,6 +100,7 @@ namespace battleship_game
                     drawShips.DrawOpponent(OpponentShips, MissedShots);
 
                     hitCounter = 0;
+
                     for (int i = 0; i < OpponentShips.Count(); i++)
                     {
                         if (OpponentShips[i].Hits is List<Point>)

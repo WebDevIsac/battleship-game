@@ -61,7 +61,7 @@ namespace battleship_game
                 for (int i = 0; i < shipLength; i++)
                 {
                     Console.SetCursorPosition(posX, posY + i);
-                    Console.Write("O");
+                    Console.Write(" ");
                     this.Positions.Add(new Point { X = posX, Y = posY + i });
                 }
             }
@@ -77,14 +77,16 @@ namespace battleship_game
                         {
                             for (int j = 0; j < OpponentShips[i].Positions.Count(); j++)
                             {
-                                if (OpponentShips[i].Positions[j].X == posX || OpponentShips[i].Positions[j].Y == posY)
+                                if (OpponentShips[i].Positions[j].X != posX && OpponentShips[i].Positions[j].Y != posY)
                                 {
-                                    posX = randomGenerator.Next(2, Program.borderWidth - shipLength - 2);
-                                    posY = randomGenerator.Next((Program.borderHeight / 2) + 2, Program.borderHeight - 2);
+                                    samePos = false;
                                 }
                                 else
                                 {
-                                    samePos = false;
+                                    posX = randomGenerator.Next(2, Program.borderWidth - shipLength - 2);
+                                    posY = randomGenerator.Next((Program.borderHeight / 2) + 2, Program.borderHeight - 2);
+                                    samePos = true;
+                                    break;
                                 }
                             }
                         }
@@ -93,7 +95,7 @@ namespace battleship_game
                 for (int i = 0; i < shipLength; i++)
                 {
                     Console.SetCursorPosition(posX + i, posY);
-                    Console.Write("O");
+                    Console.Write(" ");
                     this.Positions.Add(new Point { X = posX + i, Y = posY });
                 }
             }

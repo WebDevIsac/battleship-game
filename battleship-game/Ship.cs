@@ -26,7 +26,7 @@ namespace battleship_game
                 }
                 else
                 {
-                    this.Positions.Add(new Point { X = posX - i, Y = posY });
+                    this.Positions.Add(new Point { X = posX + i, Y = posY });
                 }
             }
         }

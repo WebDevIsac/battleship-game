@@ -21,7 +21,7 @@ namespace battleship_game
                     }
                     else
                     {
-                        Console.SetCursorPosition(Ships[i].Positions[j].X + Ships[i].Positions.Count() - 1, Ships[i].Positions[j].Y);
+                        Console.SetCursorPosition(Ships[i].Positions[j].X, Ships[i].Positions[j].Y);
                         Console.Write("O");
                     }
                 }

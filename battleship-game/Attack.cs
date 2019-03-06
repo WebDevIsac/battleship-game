@@ -140,24 +140,23 @@ namespace battleship_game
                     }
                 }
 
-
+                //Console.WriteLine($"X = {shotPosX}");
+                //Console.WriteLine($"Y = {shotPosY}");
                 for (int j = 0; j < Ships[i].Positions.Count(); j++)
                 {
                     if (Ships[i].Positions[j].X == shotPosX && Ships[i].Positions[j].Y == shotPosY)
                     {
-                        Console.SetCursorPosition(40, 20);
-                        Console.WriteLine("HIT!");
                         if (!(Ships[i].Hits is List<Point>))
                         {
                             Ships[i].Hits = new List<Point>();
-                        }
-                        Ships[i].Hits.Add(new Point { X = shotPosX, Y = shotPosY });
+                        };
+                        Ships[i].Hits.Add(new Point { X = shotPosX , Y = shotPosY });
 
                         return (true, Ships, MissedShots);
                     }
                 }
             }
-
+            
             MissedShots.Add(new Point { X = shotPosX, Y = shotPosY });
 
             return (false, Ships, MissedShots);

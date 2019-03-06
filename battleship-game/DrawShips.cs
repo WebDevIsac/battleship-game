@@ -21,19 +21,33 @@ namespace battleship_game
                     }
                     else
                     {
-                        //Console.WriteLine(Ships[i].Positions[j].X + Ships[i].Positions.Count() - 1);
                         Console.SetCursorPosition(Ships[i].Positions[j].X + Ships[i].Positions.Count() - 1, Ships[i].Positions[j].Y);
                         Console.Write("O");
                     }
-                    //Console.WriteLine(Ships[i].Positions[j].Y);
                 }
             }
         }
 
-        /*public List<List<Point>> DrawOpponent ()
+        public void DrawOpponent (List<OpponentShip> OpponentShips)
         {
-            List<Point> opponentShip = new List<Point>();
-            List<opponentShip> opponentShips = new List<opponentShip>();
-        }*/
+            for (int i = 0; i < OpponentShips.Count(); i++)
+            {
+                for (int j = 0; j < OpponentShips[i].Positions.Count(); j++)
+                {
+                    Console.SetCursorPosition(OpponentShips[i].Positions[j].X, OpponentShips[i].Positions[j].Y);
+                    Console.Write("O");
+                }
+                if (OpponentShips[i].Hits is List<Point>)
+                {
+                    for (int j = 0; j < OpponentShips[i].Hits.Count(); j++)
+                    {
+                        Console.SetCursorPosition(OpponentShips[i].Hits[j].X, OpponentShips[i].Hits[j].Y);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("X");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                }
+            }
+        }
     }
 }

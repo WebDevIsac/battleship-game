@@ -121,15 +121,14 @@ namespace battleship_game
                             Console.SetCursorPosition(Program.shipPosX, Program.shipPosY - 1);
                             Console.Write(" ");
                             break;
-                        case KeyEnum.Right:
-                            Console.SetCursorPosition(Program.shipPosX - 1, Program.shipPosY + i);
-                            Console.Write(" ");
-                            break;
                         case KeyEnum.Left:
                             Console.SetCursorPosition(Program.shipPosX + 1, Program.shipPosY + i);
                             Console.Write(" ");
                             break;
-
+                        case KeyEnum.Right:
+                            Console.SetCursorPosition(Program.shipPosX - 1, Program.shipPosY + i);
+                            Console.Write(" ");
+                            break;
                     }
                 }
             }
@@ -149,12 +148,12 @@ namespace battleship_game
                             Console.SetCursorPosition(Program.shipPosX + i, Program.shipPosY - 1);
                             Console.Write(" ");
                             break;
-                        case KeyEnum.Right:
-                            Console.SetCursorPosition(Program.shipPosX - 1, Program.shipPosY);
-                            Console.Write(" ");
-                            break;
                         case KeyEnum.Left:
                             Console.SetCursorPosition(Program.shipPosX + Program.shipLength, Program.shipPosY);
+                            Console.Write(" ");
+                            break;
+                        case KeyEnum.Right:
+                            Console.SetCursorPosition(Program.shipPosX - 1, Program.shipPosY);
                             Console.Write(" ");
                             break;
                     }

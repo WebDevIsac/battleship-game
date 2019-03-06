@@ -19,9 +19,13 @@ namespace battleship_game
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.Clear();
             Console.CursorVisible = false;
-            
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+
             bool settingUpGame = true;
             bool movingShip = true;
+            bool gameActive = true;
+            bool movingTarget = true;
+            bool hit = false;
 
             int shipPosX;
             int shipPosY;
@@ -31,9 +35,11 @@ namespace battleship_game
             ActiveShip activeShip;
             List<OpponentShip> OpponentShips = new List<OpponentShip>();
             List<Ship> Ships = new List<Ship>();
+            List<Point> MissedShots = new List<Point>();
             Board boarder = new Board();
             Controller controller = new Controller();
             DrawShips drawShips = new DrawShips();
+            Attack attack;
 
 
             boarder.DrawBorder();
@@ -54,7 +60,7 @@ namespace battleship_game
 
                 Ships.Add(new Ship(Program.shipPosX, Program.shipPosY, Program.shipLength, rotate));
 
-                OpponentShips.Add(new OpponentShip(Program.shipLength));
+                OpponentShips.Add(new OpponentShip(Program.shipLength, OpponentShips));
 
                 movingShip = true;
                 Program.shipPosX = 2;
@@ -63,6 +69,7 @@ namespace battleship_game
 
                 Program.shipLength--;
             }
+            
 
 
             Console.WriteLine();
@@ -74,15 +81,38 @@ namespace battleship_game
             {
                 for (int j = 0; j < OpponentShips[i].Positions.Count(); j++)
                 {
-                    Console.WriteLine($"X = {OpponentShips[i].Positions[j].X}");
-                    Console.WriteLine($"Y = {OpponentShips[i].Positions[j].Y}");
+                    //Console.WriteLine($"X = {OpponentShips[i].Positions[j].X}");
+                    //Console.WriteLine($"Y = {OpponentShips[i].Positions[j].Y}");
                 }
             }
-            
 
+            int shotPosX;
+            int shotPosY;
 
+            while (gameActive)
+            {
+                attack = new Attack();
+                while (movingTarget)
+                {
+                    pressedKey = controller.KeyPressed();
+                    if (attack.MoveTarget(pressedKey))
+                    {
+                        (hit, OpponentShips, shotPosX, shotPosY) = attack.Shoot(OpponentShips);
+                        if (!hit)
+                        {
 
-            Console.SetCursorPosition(8, 20);
+                        }
+                        else
+                        {
+
+                        }
+                        //Console.Write(OpponentShips[0].Hits[0].X);
+                    }
+                    drawShips.DrawOpponent(OpponentShips);
+                }
+            }
+
+           
         }
     }
 }

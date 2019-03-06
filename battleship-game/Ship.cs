@@ -30,11 +30,5 @@ namespace battleship_game
                 }
             }
         }
-        
-
-        public bool CheckIfHit (int bombX, int bombY)
-        {
-            return (this.Positions.Any(pos => pos.X == bombX & pos.Y == bombY));
-        }
     }
 }

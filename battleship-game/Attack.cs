@@ -139,9 +139,7 @@ namespace battleship_game
                         }
                     }
                 }
-
-                //Console.WriteLine($"X = {shotPosX}");
-                //Console.WriteLine($"Y = {shotPosY}");
+                
                 for (int j = 0; j < Ships[i].Positions.Count(); j++)
                 {
                     if (Ships[i].Positions[j].X == shotPosX && Ships[i].Positions[j].Y == shotPosY)

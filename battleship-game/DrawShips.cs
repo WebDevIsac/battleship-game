@@ -66,7 +66,7 @@ namespace battleship_game
                     if (OpponentShips[i].Positions[j].X != Program.targetPosX || OpponentShips[i].Positions[j].Y != Program.targetPosY)
                     {
                         Console.SetCursorPosition(OpponentShips[i].Positions[j].X, OpponentShips[i].Positions[j].Y);
-                        Console.Write("O");
+                        Console.Write(" ");
                     }
                 }
                 if (OpponentShips[i].Hits is List<Point>)

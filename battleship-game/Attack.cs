@@ -94,16 +94,59 @@ namespace battleship_game
 
         public (bool, List<Ship>, List<Point>) OpponentAttack (List<Ship> Ships, List<Point> MissedShots)
         {
+            bool samePos = true;
             var randomGenerator = new Random();
             int shotPosX = randomGenerator.Next(2, Program.borderWidth - 2);
-            int shotPosY = randomGenerator.Next(2, (Program.borderHeight / 2) - 2);
+            int shotPosY = randomGenerator.Next(2, (Program.borderHeight / 2) - 1);
+            
+            if (MissedShots.Any())
+            {
+                while (samePos)
+                {
+                    for (int i = 0; i < MissedShots.Count(); i++)
+                    {
+                        if (MissedShots[i].X == shotPosX && MissedShots[i].Y == shotPosY)
+                        {
+                            shotPosX = randomGenerator.Next(2, Program.borderWidth - 2);
+                            shotPosY = randomGenerator.Next(2, (Program.borderHeight / 2) - 1);
+                        }
+                        else
+                        {
+                            samePos = false;
+                        }
+                    }
+                }
+            }
+            
 
             for (int i = 0; i < Ships.Count(); i++)
             {
+                if (Ships[i].Hits is List<Point>)
+                {
+                    while (samePos)
+                    {
+                        for (int j = 0; j < Ships[i].Hits.Count(); j++)
+                        {
+                            if (Ships[i].Hits[j].X == shotPosX && Ships[i].Hits[j].Y == shotPosY)
+                            {
+                                shotPosX = randomGenerator.Next(2, Program.borderWidth - 2);
+                                shotPosY = randomGenerator.Next(2, (Program.borderHeight / 2) - 1);
+                            }
+                            else
+                            {
+                                samePos = false;
+                            }
+                        }
+                    }
+                }
+
+
                 for (int j = 0; j < Ships[i].Positions.Count(); j++)
                 {
                     if (Ships[i].Positions[j].X == shotPosX && Ships[i].Positions[j].Y == shotPosY)
                     {
+                        Console.SetCursorPosition(40, 20);
+                        Console.WriteLine("HIT!");
                         if (!(Ships[i].Hits is List<Point>))
                         {
                             Ships[i].Hits = new List<Point>();

@@ -63,7 +63,7 @@ namespace battleship_game
                     movingShip = activeShip.MoveShip(pressedKey);
                     if (Ships.Any())
                     {
-                        drawShips.Draw(Ships);
+                        drawShips.Draw(Ships, OpponentMissedShots);
                     }
                 }
 
@@ -84,6 +84,7 @@ namespace battleship_game
             int shotPosX;
             int shotPosY;
             int hitCounter = 0;
+            bool playerAttacked;
 
             while (hitCounter < 5)
             {
@@ -91,7 +92,8 @@ namespace battleship_game
                 while (movingTarget)
                 {
                     pressedKey = controller.KeyPressed();
-                    if (attack.MoveTarget(pressedKey))
+                    playerAttacked = attack.MoveTarget(pressedKey);
+                    if (playerAttacked)
                     {
                         (hit, OpponentShips, MissedShots) = attack.Shoot(OpponentShips, MissedShots);
                     }
@@ -112,8 +114,11 @@ namespace battleship_game
                             }
                         }
                     }
-
-                    attack.OpponentAttack(Ships, OpponentMissedShots);
+                    if (playerAttacked)
+                    {
+                        (hit, Ships, OpponentMissedShots) = attack.OpponentAttack(Ships, OpponentMissedShots);
+                        drawShips.Draw(Ships, OpponentMissedShots);
+                    }
 
                     
                 }

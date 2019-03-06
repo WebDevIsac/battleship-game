@@ -8,7 +8,7 @@ namespace battleship_game
 {
     class DrawShips
     {
-        public void Draw (List<Ship> Ships)
+        public void Draw (List<Ship> Ships, List<Point> MissedShots)
         {
             for (int i = 0; i < Ships.Count(); i++)
             {
@@ -24,6 +24,35 @@ namespace battleship_game
                         Console.SetCursorPosition(Ships[i].Positions[j].X + Ships[i].Positions.Count() - 1, Ships[i].Positions[j].Y);
                         Console.Write("O");
                     }
+                }
+
+                if (Ships[i].Hits is List<Point>)
+                {
+                    for (int j = 0; j < Ships[i].Hits.Count(); j++)
+                    {
+                        Console.SetCursorPosition(Ships[i].Hits[j].X, Ships[i].Hits[j].Y);
+                        if (Ships[i].Hits.Count != Ships[i].Positions.Count())
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("X");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Black;
+                            Console.Write("X");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                    }
+                }
+            }
+
+            if (MissedShots.Any())
+            {
+                for (int i = 0; i < MissedShots.Count(); i++)
+                {
+                    Console.SetCursorPosition(MissedShots[i].X, MissedShots[i].Y);
+                    Console.Write("X");
                 }
             }
         }

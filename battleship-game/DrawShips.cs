@@ -28,24 +28,45 @@ namespace battleship_game
             }
         }
 
-        public void DrawOpponent (List<OpponentShip> OpponentShips)
+        public void DrawOpponent (List<OpponentShip> OpponentShips, List<Point> MissedShots)
         {
             for (int i = 0; i < OpponentShips.Count(); i++)
             {
                 for (int j = 0; j < OpponentShips[i].Positions.Count(); j++)
                 {
-                    Console.SetCursorPosition(OpponentShips[i].Positions[j].X, OpponentShips[i].Positions[j].Y);
-                    Console.Write("O");
+                    if (OpponentShips[i].Positions[j].X != Program.targetPosX || OpponentShips[i].Positions[j].Y != Program.targetPosY)
+                    {
+                        Console.SetCursorPosition(OpponentShips[i].Positions[j].X, OpponentShips[i].Positions[j].Y);
+                        Console.Write("O");
+                    }
                 }
                 if (OpponentShips[i].Hits is List<Point>)
                 {
                     for (int j = 0; j < OpponentShips[i].Hits.Count(); j++)
                     {
                         Console.SetCursorPosition(OpponentShips[i].Hits[j].X, OpponentShips[i].Hits[j].Y);
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("X");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        if (OpponentShips[i].Hits.Count() != OpponentShips[i].Positions.Count())
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("X");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Black;
+                            Console.Write("X");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
                     }
+                }
+            }
+            
+            if (MissedShots.Any())
+            {
+                for (int i = 0; i < MissedShots.Count(); i++)
+                {
+                    Console.SetCursorPosition(MissedShots[i].X, MissedShots[i].Y);
+                    Console.Write("X");
                 }
             }
         }

@@ -12,7 +12,7 @@ namespace battleship_game
         public int length { get; set; }
         public bool rotate { get; set; }
 
-        public int hits { get; set; }
+        public List<Point> Hits { get; set; }
 
         public Ship (int posX, int posY, int shipLength, bool rotate)
         {

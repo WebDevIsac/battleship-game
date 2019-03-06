@@ -8,35 +8,32 @@ namespace battleship_game
 {
     class Attack
     {
-        public int targetPosX = 2;
-        public int targetPosY = (Program.borderHeight / 2) + 2;
-
         public bool MoveTarget (KeyEnum pressedKey)
         {
 
             switch (pressedKey)
             {
                 case KeyEnum.Up:
-                    if (this.targetPosY > (Program.borderHeight / 2) + 2) {
-                        this.targetPosY--;
+                    if (Program.targetPosY > (Program.borderHeight / 2) + 2) {
+                        Program.targetPosY--;
                     }
                     break;
                 case KeyEnum.Down:
-                    if (this.targetPosY < Program.borderHeight - 2)
+                    if (Program.targetPosY < Program.borderHeight - 2)
                     {
-                        this.targetPosY++;
+                        Program.targetPosY++;
                     }
                     break;
                 case KeyEnum.Left:
-                    if (this.targetPosX > 2)
+                    if (Program.targetPosX > 2)
                     {
-                        this.targetPosX--;
+                        Program.targetPosX--;
                     }
                     break;
                 case KeyEnum.Right:
-                    if (this.targetPosX < Program.borderWidth - 2)
+                    if (Program.targetPosX < Program.borderWidth - 2)
                     {
-                        this.targetPosX++;
+                        Program.targetPosX++;
                     }
                     break;
                 case KeyEnum.Enter:
@@ -45,50 +42,82 @@ namespace battleship_game
                     break;
             }
 
-            Console.SetCursorPosition(this.targetPosX, this.targetPosY);
-            Console.Write("⬞");
+            Console.SetCursorPosition(Program.targetPosX, Program.targetPosY);
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.Write(" ");
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
 
             switch (pressedKey)
             {
                 case KeyEnum.Up:
-                    Console.SetCursorPosition(this.targetPosX, this.targetPosY + 1);
+                    Console.SetCursorPosition(Program.targetPosX, Program.targetPosY + 1);
                     Console.Write(" ");
                     break;
                 case KeyEnum.Down:
-                    Console.SetCursorPosition(this.targetPosX, this.targetPosY - 1);
+                    Console.SetCursorPosition(Program.targetPosX, Program.targetPosY - 1);
                     Console.Write(" ");
                     break;
                 case KeyEnum.Left:
-                    Console.SetCursorPosition(this.targetPosX + 1, this.targetPosY);
+                    Console.SetCursorPosition(Program.targetPosX + 1, Program.targetPosY);
                     Console.Write(" ");
                     break;
                 case KeyEnum.Right:
-                    Console.SetCursorPosition(this.targetPosX - 1, this.targetPosY);
+                    Console.SetCursorPosition(Program.targetPosX - 1, Program.targetPosY);
                     Console.Write(" ");
                     break;
             }
             return false;
         }
 
-        public (bool, List<OpponentShip>, int, int) Shoot (List<OpponentShip> OpponentShips)
+        public (bool, List<OpponentShip>, List<Point>) Shoot (List<OpponentShip> OpponentShips, List<Point> MissedShots)
         {
             for (int i = 0; i < OpponentShips.Count(); i++)
             {
                 for (int j = 0; j < OpponentShips[i].Positions.Count(); j++)
                 {
-                    if (OpponentShips[i].Positions[j].X == this.targetPosX && OpponentShips[i].Positions[j].Y == this.targetPosY)
+                    if (OpponentShips[i].Positions[j].X == Program.targetPosX && OpponentShips[i].Positions[j].Y == Program.targetPosY)
                     {
                         if (!(OpponentShips[i].Hits is List<Point>))
                         {
                             OpponentShips[i].Hits = new List<Point>();
                         }
-                        OpponentShips[i].Hits.Add( new Point { X = this.targetPosX, Y = this.targetPosY });
-                        return (true, OpponentShips, targetPosX, targetPosY);
+                        OpponentShips[i].Hits.Add( new Point { X = Program.targetPosX, Y = Program.targetPosY });
+                        return (true, OpponentShips, MissedShots);
                     }
                 }
             }
 
-            return (false, OpponentShips, targetPosX, targetPosY);
+            MissedShots.Add(new Point { X = Program.targetPosX, Y = Program.targetPosY });
+
+            return (false, OpponentShips, MissedShots);
+        }
+
+        public (bool, List<Ship>, List<Point>) OpponentAttack (List<Ship> Ships, List<Point> MissedShots)
+        {
+            var randomGenerator = new Random();
+            int shotPosX = randomGenerator.Next(2, Program.borderWidth - 2);
+            int shotPosY = randomGenerator.Next(2, (Program.borderHeight / 2) - 2);
+
+            for (int i = 0; i < Ships.Count(); i++)
+            {
+                for (int j = 0; j < Ships[i].Positions.Count(); j++)
+                {
+                    if (Ships[i].Positions[j].X == shotPosX && Ships[i].Positions[j].Y == shotPosY)
+                    {
+                        if (!(Ships[i].Hits is List<Point>))
+                        {
+                            Ships[i].Hits = new List<Point>();
+                        }
+                        Ships[i].Hits.Add(new Point { X = shotPosX, Y = shotPosY });
+
+                        return (true, Ships, MissedShots);
+                    }
+                }
+            }
+
+            MissedShots.Add(new Point { X = shotPosX, Y = shotPosY });
+
+            return (false, Ships, MissedShots);
         }
     }
 }

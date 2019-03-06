@@ -45,10 +45,11 @@ namespace battleship_game
                         {
                             for (int j = 0; j < OpponentShips[i].Positions.Count(); j++)
                             {
-                                if (OpponentShips[i].Positions[j].X == posX || OpponentShips[i].Positions[j].Y == posY)
+                                if (OpponentShips[i].Positions[j].X == posX || OpponentShips[i].Positions[j].Y == posY || OpponentShips[i].Positions[j].X == posY || OpponentShips[i].Positions[j].Y == posX)
                                 {
                                     posX = randomGenerator.Next(2, Program.borderWidth - 2);
                                     posY = randomGenerator.Next((Program.borderHeight / 2) + 2, Program.borderHeight - shipLength - 2);
+                                    break;
                                 }
                                 else
                                 {
@@ -71,22 +72,22 @@ namespace battleship_game
                 posY = randomGenerator.Next((Program.borderHeight / 2) + 2, Program.borderHeight - 2);
                 if (OpponentShips.Count > 0)
                 {
+                    samePos = true;
                     while (samePos)
                     {
                         for (int i = 0; i < OpponentShips.Count(); i++)
                         {
                             for (int j = 0; j < OpponentShips[i].Positions.Count(); j++)
                             {
-                                if (OpponentShips[i].Positions[j].X != posX && OpponentShips[i].Positions[j].Y != posY)
-                                {
-                                    samePos = false;
-                                }
-                                else
+                                if (OpponentShips[i].Positions[j].X == posX || OpponentShips[i].Positions[j].Y == posY || OpponentShips[i].Positions[j].X == posY || OpponentShips[i].Positions[j].Y == posX)
                                 {
                                     posX = randomGenerator.Next(2, Program.borderWidth - shipLength - 2);
                                     posY = randomGenerator.Next((Program.borderHeight / 2) + 2, Program.borderHeight - 2);
-                                    samePos = true;
                                     break;
+                                }
+                                else
+                                {
+                                    samePos = false;
                                 }
                             }
                         }

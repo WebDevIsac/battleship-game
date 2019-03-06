@@ -85,6 +85,7 @@ namespace battleship_game
             int shotPosY;
             int hitCounter = 0;
             bool playerAttacked;
+            bool playerWon = false;
 
             while (hitCounter < 5)
             {
@@ -110,6 +111,7 @@ namespace battleship_game
                                 hitCounter++;
                                 if (hitCounter >= 5)
                                 {
+                                    playerWon = true;
                                     movingTarget = false;
                                 }
                             }
@@ -119,6 +121,10 @@ namespace battleship_game
                     {
                         (hit, Ships, OpponentMissedShots) = attack.OpponentAttack(Ships, OpponentMissedShots);
                         drawShips.Draw(Ships, OpponentMissedShots);
+                        if (hitCounter >= 5)
+                        {
+                            movingTarget = false;
+                        }
                     }
 
                     
@@ -127,7 +133,14 @@ namespace battleship_game
 
             Console.Clear();
             Console.SetCursorPosition(15, 15);
-            Console.WriteLine("You WON!");
+            if (playerWon)
+            {
+                Console.WriteLine("You WON!");
+            }
+            else
+            {
+                Console.WriteLine("Computer WON!");
+            }
         }
     }
 }
